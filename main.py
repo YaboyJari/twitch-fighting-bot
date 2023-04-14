@@ -7,6 +7,7 @@ import webbrowser
 import threading
 import time
 from flask import Flask, request
+import vgamepad as vg
 
 load_dotenv()
 
@@ -24,6 +25,7 @@ class TwitchBot:
         self.sock = socket.socket()
         self.callback_completed = False
         self.sock.connect((self.SERVER, int(self.PORT)))
+        self.gamepad = vg.VX360Gamepad()
 
     def join_chat(self):
         loaded = False
@@ -38,12 +40,10 @@ class TwitchBot:
                     if not loaded:
                         loaded = self.check_load_complete(line)
                     else:
-                        username, channel, message = re.search(
+                        _, _, message = re.search(
                             ":(.*)\!.*@.*\.tmi\.twitch\.tv PRIVMSG #(.*) :(.*)", line
                         ).groups()
-                        print(
-                            f"Channel: {channel} \nUsername: {username} \nMessage: {message}"
-                        )
+                        self.map_chat_to_input(message)
 
     def check_load_complete(self, line):
         if "End of /NAMES list" not in line:
@@ -92,6 +92,70 @@ class TwitchBot:
             print(e)
             self.sock.close()
 
+    def map_chat_to_input(self, message):
+        if message.strip().lower() == "a":
+            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_A)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_A)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "b":
+            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_B)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_B)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "x":
+            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_X)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_X)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "y":
+            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_Y)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_Y)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "left":
+            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_LEFT)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_LEFT)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "right":
+            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_RIGHT)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_RIGHT)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "up":
+            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_UP)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_UP)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "down":
+            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_DOWN)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_DOWN)
+            self.gamepad.update()
+            time.sleep(0.1)
+        else:
+            print("Button not found")
+        print("Updating gamepad choice...")
+        time.sleep(0.5)
+        self.gamepad.reset()
+        self.gamepad.update()
+        time.sleep(1.0)
 
 def run_flask_app():
     if __name__ == "__main__":
