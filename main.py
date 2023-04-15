@@ -122,32 +122,70 @@ class TwitchBot:
             self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_Y)
             self.gamepad.update()
             time.sleep(0.1)
-        elif message.strip().lower() == "left":
+        elif message.strip().lower() == "ll":
             self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_LEFT)
             self.gamepad.update()
-            time.sleep(0.1)
+            time.sleep(0.5)
             self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_LEFT)
             self.gamepad.update()
             time.sleep(0.1)
-        elif message.strip().lower() == "right":
+        elif message.strip().lower() == "lr":
             self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_RIGHT)
             self.gamepad.update()
-            time.sleep(0.1)
+            time.sleep(0.5)
             self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_RIGHT)
             self.gamepad.update()
             time.sleep(0.1)
-        elif message.strip().lower() == "up":
-            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_UP)
+        elif message.strip().lower() == "right":
+            self.gamepad.left_joystick_float(x_value_float=1.0, y_value_float=0.0)
             self.gamepad.update()
             time.sleep(0.1)
-            self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_UP)
+        elif message.strip().lower() == "left":
+            self.gamepad.left_joystick_float(x_value_float=-1.0, y_value_float=0.0)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "up":
+            self.gamepad.left_joystick_float(x_value_float=0.0, y_value_float=1.0)
             self.gamepad.update()
             time.sleep(0.1)
         elif message.strip().lower() == "down":
-            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_DOWN)
+            self.gamepad.left_joystick_float(x_value_float=0.0, y_value_float=-1.0)
             self.gamepad.update()
             time.sleep(0.1)
-            self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_DOWN)
+        elif message.strip().lower() == "dld":
+            self.gamepad.left_joystick_float(x_value_float=-1.0, y_value_float=-1.0)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "dlu":
+            self.gamepad.left_joystick_float(x_value_float=-1.0, y_value_float=-1.0)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "drd":
+            self.gamepad.left_joystick_float(x_value_float=1.0, y_value_float=-1.0)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "dru":
+            self.gamepad.left_joystick_float(x_value_float=1.0, y_value_float=1.0)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "ql":
+            self.gamepad.left_joystick_float(x_value_float=0.0, y_value_float=-1.0)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.left_joystick_float(x_value_float=-1.0, y_value_float=-1.0)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.left_joystick_float(x_value_float=-1.0, y_value_float=0.0)
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "qr":
+            self.gamepad.left_joystick_float(x_value_float=0.0, y_value_float=-1.0)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.left_joystick_float(x_value_float=1.0, y_value_float=-1.0)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.left_joystick_float(x_value_float=1.0, y_value_float=0.0)
             self.gamepad.update()
             time.sleep(0.1)
         elif message.strip().lower() == "rb":
