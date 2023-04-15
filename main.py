@@ -150,13 +150,39 @@ class TwitchBot:
             self.gamepad.release_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_DPAD_DOWN)
             self.gamepad.update()
             time.sleep(0.1)
+        elif message.strip().lower() == "rb":
+            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_RIGHT_SHOULDER)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.release_button(
+                button=vg.XUSB_BUTTON.XUSB_GAMEPAD_RIGHT_SHOULDER
+            )
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "rbl":
+            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_RIGHT_SHOULDER)
+            self.gamepad.update()
+            time.sleep(1.0)
+            self.gamepad.release_button(
+                button=vg.XUSB_BUTTON.XUSB_GAMEPAD_RIGHT_SHOULDER
+            )
+            self.gamepad.update()
+            time.sleep(0.1)
+        elif message.strip().lower() == "lb":
+            self.gamepad.press_button(button=vg.XUSB_BUTTON.XUSB_GAMEPAD_LEFT_SHOULDER)
+            self.gamepad.update()
+            time.sleep(0.1)
+            self.gamepad.release_button(
+                button=vg.XUSB_BUTTON.XUSB_GAMEPAD_LEFT_SHOULDER
+            )
+            self.gamepad.update()
+            time.sleep(0.1)
         else:
             print("Button not found")
         print("Updating gamepad choice...")
-        time.sleep(0.2)
         self.gamepad.reset()
         self.gamepad.update()
-        time.sleep(0.2)
+
 
 def run_flask_app():
     if __name__ == "__main__":
