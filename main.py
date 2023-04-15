@@ -8,6 +8,7 @@ import threading
 import time
 from flask import Flask, request
 import vgamepad as vg
+from shared_gamepad import GAMEPAD
 
 load_dotenv()
 
@@ -25,7 +26,7 @@ class TwitchBot:
         self.sock = socket.socket()
         self.callback_completed = False
         self.sock.connect((self.SERVER, int(self.PORT)))
-        self.gamepad = vg.VX360Gamepad()
+        self.gamepad = GAMEPAD
 
     def join_chat(self):
         loaded = False
@@ -152,10 +153,10 @@ class TwitchBot:
         else:
             print("Button not found")
         print("Updating gamepad choice...")
-        time.sleep(0.5)
+        time.sleep(0.2)
         self.gamepad.reset()
         self.gamepad.update()
-        time.sleep(1.0)
+        time.sleep(0.2)
 
 def run_flask_app():
     if __name__ == "__main__":
